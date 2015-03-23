@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Assert-Javascript</title>
+</head>
+<body>
+	<style>
+		.pass:before{
+			content: 'Pass: ';
+			color: green;
+		}
+
+		.fail:before{
+			content: 'Fail: ';
+			color: red;
+		}
+	</style>
+
+	<h1 id="result"></h1>
+
+	<script>
+		var assert = function assert(outcome, description){
+			var list = document.createElement('li');
+
+			list.className = outcome ? 'pass' : 'fail';
+			list.appendChild(document.createTextNode(description));
+
+			result.appendChild(list);
+		}
+
+		var myArray = [1, 2, 3, 4, 5];
+		var count = 0;
+
+		for (var i = 0; i < myArray.length; i = i + 1) {
+			(function(i){
+				setTimeout(function(){
+					assert(count ++ === i, 'It should return ' + i);
+				}, i * 1000);
+			}(i));
+		};
+	</script>
+</body>
+</html>
